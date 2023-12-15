@@ -9,14 +9,14 @@ import json
 app = FastAPI()
 
 
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.get("/")
 async def root():
@@ -27,6 +27,7 @@ async def root():
     # return json.dumps(ans)
     return r.json()
 
+
 @app.get("/list/")
 async def get_list(q: list | None = Query()):
     film_list = []
@@ -35,6 +36,6 @@ async def get_list(q: list | None = Query()):
         film_list.append(r.json())
     return film_list
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv('PORT', 80)))
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 80)))
